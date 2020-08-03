@@ -33,8 +33,10 @@ const Workout = mongoose.model('Workout', workoutSchema);
 const validate = function validateWorkout(workout) {
   const schema = new Joi.object({
     type: Joi.string().min(4).max(50).required(),
-    date: Joi.date().required(),
-    sessionLength: Joi.number().required(),
+    date: Joi.string().required(),
+    sessionLength: Joi.string().required(),
+    techniques: Joi.array(),
+    notes: Joi.string(),
   });
 
   return schema.validate(workout);
