@@ -4,12 +4,9 @@ node_js:
 dist: trusty
 services:
   - mongodb
-cache:
-  directories:
-    - node_modules
-install:
-  - npm install
 script:
+  - cd ./server
+  - npm install
   - nohup npm run start &
   - sleep 3
   - npm run test
