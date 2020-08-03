@@ -1,0 +1,3 @@
+{
+  "db": "mongodb://localhost/bjj_log_tests"
+}
