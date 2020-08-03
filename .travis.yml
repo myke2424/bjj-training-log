@@ -10,4 +10,4 @@ script:
   - npm install
   - nohup npm run start &
   - sleep 3
-  - npm test_ci
+  - npm test
