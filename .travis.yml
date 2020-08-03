@@ -2,6 +2,7 @@ language: node_js
 node_js:
   - '14'
 dist: trusty
+cache: npm
 services:
   - mongodb
 script:
@@ -9,4 +10,4 @@ script:
   - npm install
   - nohup npm run start &
   - sleep 3
-  - npm run test
+  - npm test_ci
