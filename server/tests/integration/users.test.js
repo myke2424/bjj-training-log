@@ -1,4 +1,5 @@
 const request = require('supertest');
+const mongoose = require('mongoose');
 const { User } = require('../../models/user');
 
 let server;
@@ -10,6 +11,7 @@ describe('/api/users', () => {
 
   afterEach(async () => {
     server.close();
+    mongoose.connection.close();
   });
 
   describe('POST /', () => {
