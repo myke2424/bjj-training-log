@@ -1,4 +1,5 @@
 const express = require('express');
+const auth = require('../routes/auth');
 const users = require('../routes/users');
 const workouts = require('../routes/workouts');
 
@@ -8,4 +9,5 @@ module.exports = function (app) {
 
   app.use('/api/users', users);
   app.use('/api/workouts', workouts);
+  app.use('/api/auth', auth);
 };
