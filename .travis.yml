@@ -5,6 +5,8 @@ dist: trusty
 cache: npm
 services:
   - mongodb
+env:
+  - bjj_log_jwtPrivateKey=encryptThisLater
 script:
   - cd ./server
   - npm install
