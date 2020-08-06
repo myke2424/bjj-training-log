@@ -8,7 +8,7 @@ const workoutSchema = new mongoose.Schema({
     minlength: 4,
     maxlength: 50,
   },
-  user: {
+  userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
   },
@@ -33,7 +33,7 @@ const Workout = mongoose.model('Workout', workoutSchema);
 const validate = function validateWorkout(workout) {
   const schema = new Joi.object({
     type: Joi.string().min(4).max(50).required(),
-    user: Joi.allow().required(),
+    userId: Joi.allow().required(),
     date: Joi.string().required(),
     sessionLength: Joi.string().required(),
     techniques: Joi.array(),

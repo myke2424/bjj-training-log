@@ -21,7 +21,7 @@ describe('/api/workouts', () => {
   const req = {
     body: {
       type: 'adult-open',
-      user: mongoose.Types.ObjectId(),
+      userId: mongoose.Types.ObjectId(),
       date: '8/3/2020',
       sessionLength: '30minutes',
       techniques: ['armbar', 'side-control'],
@@ -70,7 +70,7 @@ describe('/api/workouts', () => {
 
     it('should return 400 if the user id isnt specified', async () => {
       let workout = { ...req.body };
-      delete workout.user;
+      delete workout.userId;
 
       const res = await request(server).post('/api/workouts').send(workout);
 

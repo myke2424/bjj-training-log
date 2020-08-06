@@ -9,7 +9,7 @@ const createWorkout = async (req, res) => {
 
   const workout = new Workout({
     type: req.body.type,
-    user: req.body.userId,
+    userId: req.body.userId,
     date: req.body.date,
     sessionLength: req.body.sessionLength,
     techniques: req.body.techniques,
