@@ -23,7 +23,12 @@ const createUser = async (req, res) => {
   user.password = await bcrypt.hash(user.password, salt);
   await user.save();
 
-  res.send({
+  // On the client-side - when we register a user - we can read this auth header
+  // We can store the JSON web-token on the client
+  // When the user needs to make an API call he'll send this to the server
+  const token = user.generateAuthToken();
+  res.header('x-auth-token', token).send({
+    _id: user._id,
     user: user.name,
     email: user.email,
   });
