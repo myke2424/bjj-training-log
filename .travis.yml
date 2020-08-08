@@ -5,6 +5,8 @@ dist: trusty
 cache: npm
 services:
   - mongodb
+env:
+  - JWT_KEY=testKey
 script:
   - cd ./server
   - npm install
