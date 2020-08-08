@@ -19,10 +19,17 @@ describe('/api/workouts', () => {
     mongoose.connection.close();
   });
 
+  const user = new User({
+    name: 'mike',
+    email: 'michael24@gmail.com',
+    password: 12345,
+    belt: 'white',
+  });
+
   const req = {
     body: {
       type: 'adult-open',
-      userId: mongoose.Types.ObjectId(),
+      userId: user._id,
       date: '8/3/2020',
       sessionLength: '30minutes',
       techniques: ['armbar', 'side-control'],
@@ -63,7 +70,7 @@ describe('/api/workouts', () => {
   });
 
   describe('POST /', () => {
-    const token = new User().generateAuthToken();
+    const token = user.generateAuthToken();
 
     it('should save the workout if it is valid', async () => {
       const res = await request(server)
