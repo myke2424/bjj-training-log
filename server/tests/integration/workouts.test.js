@@ -1,6 +1,7 @@
 const request = require('supertest');
 const mongoose = require('mongoose');
 const { Workout } = require('../../models/workout');
+const { User } = require('../../models/user');
 
 let server;
 
@@ -62,8 +63,13 @@ describe('/api/workouts', () => {
   });
 
   describe('POST /', () => {
+    const token = new User().generateAuthToken();
+
     it('should save the workout if it is valid', async () => {
-      const res = await request(server).post('/api/workouts').send(req.body);
+      const res = await request(server)
+        .post('/api/workouts')
+        .set('x-auth-token', token)
+        .send(req.body);
 
       expect(res.body).not.toBeNull();
     });
@@ -72,7 +78,10 @@ describe('/api/workouts', () => {
       let workout = { ...req.body };
       delete workout.userId;
 
-      const res = await request(server).post('/api/workouts').send(workout);
+      const res = await request(server)
+        .post('/api/workouts')
+        .set('x-auth-token', token)
+        .send(workout);
 
       expect(res.status).toBe(400);
     });
@@ -81,7 +90,10 @@ describe('/api/workouts', () => {
       let workout = { ...req.body };
       delete workout.type;
 
-      const res = await request(server).post('/api/workouts').send(workout);
+      const res = await request(server)
+        .post('/api/workouts')
+        .set('x-auth-token', token)
+        .send(workout);
 
       expect(res.status).toBe(400);
     });
@@ -90,7 +102,10 @@ describe('/api/workouts', () => {
       let workout = { ...req.body };
       delete workout.sessionLength;
 
-      const res = await request(server).post('/api/workouts').send(workout);
+      const res = await request(server)
+        .post('/api/workouts')
+        .set('x-auth-token', token)
+        .send(workout);
 
       expect(res.status).toBe(400);
     });
@@ -99,7 +114,10 @@ describe('/api/workouts', () => {
       let workout = { ...req.body };
       delete workout.type;
 
-      const res = await request(server).post('/api/workouts').send(workout);
+      const res = await request(server)
+        .post('/api/workouts')
+        .set('x-auth-token', token)
+        .send(workout);
 
       expect(res.status).toBe(400);
     });
