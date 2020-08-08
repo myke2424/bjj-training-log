@@ -1,4 +1,5 @@
 const express = require('express');
+const auth = require('../middleware/auth');
 const router = express.Router();
 const {
   createWorkout,
@@ -8,7 +9,9 @@ const {
   deleteWorkout,
 } = require('../controllers/workouts');
 
-router.post('/', createWorkout);
+// This API Endpoint can only be accessed by authenticated users
+router.post('/', auth, createWorkout);
+
 router.get('/', getWorkouts);
 router.get('/:id', getWorkout);
 router.put('/:id', updateWorkout);

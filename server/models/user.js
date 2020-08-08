@@ -31,6 +31,7 @@ const userSchema = new mongoose.Schema({
 
 userSchema.methods.generateAuthToken = function () {
   const jwtPrivateKey = process.env.JWT_KEY;
+  // id is the payload - once decoded store as req.user (auth middleware)
   const token = jwt.sign({ _id: this._id }, jwtPrivateKey);
   return token;
 };
