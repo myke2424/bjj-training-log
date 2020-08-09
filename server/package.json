@@ -1,7 +1,7 @@
 {
   "name": "bjj-training-log",
   "version": "1.0.0",
-  "description": "",
+  "description": "bjj-server",
   "main": "index.js",
   "scripts": {
     "test": "jest --testEnvironment=node --verbose --forceExit --maxWorkers=1"
