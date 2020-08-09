@@ -7,6 +7,13 @@ module.exports = function (app) {
   // Parse incoming JSON request
   app.use(express.json());
 
+  // allows cors
+  app.use(function (req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
+    next();
+  });
+
   app.use('/api/users', users);
   app.use('/api/workouts', workouts);
   app.use('/api/auth', auth);
