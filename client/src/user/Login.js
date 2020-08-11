@@ -5,9 +5,11 @@ function Login() {
   const [userInfo, setUserInfo] = useState({
     email: '',
     password: '',
+    error: '',
+    redirectTo: false,
   });
 
-  const { email, password } = userInfo;
+  const { email, password, redirectTo, error } = userInfo;
 
   // Dynamic handler (Handle multiple input changes)
   const handleInputChange = (event) => {
@@ -31,13 +33,23 @@ function Login() {
     })
       .then((response) => {
         console.log(response);
-        setUserInfo({ ...userInfo });
+        setUserInfo({ ...userInfo, redirectTo: true });
       })
-      .catch((err) => console.log(err.message));
+      .catch((err) => {
+        console.log(err.message);
+        setUserInfo({ ...userInfo, error: err.message });
+      });
+  };
+
+  const showError = () => <div>{error}</div>;
+
+  const redirectUser = () => {
+    if (redirectTo) console.log('redirecting placeholder...');
   };
 
   const loginForm = () => (
     <form>
+      <h3>Sign In</h3>
       <div className='form-group'>
         <label>Email</label>
         <input
@@ -62,7 +74,13 @@ function Login() {
     </form>
   );
 
-  return <div>{loginForm()}</div>;
+  return (
+    <div>
+      {loginForm()}
+      {redirectUser()}
+      {showError()}
+    </div>
+  );
 }
 
 export default Login;
