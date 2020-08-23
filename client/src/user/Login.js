@@ -23,7 +23,7 @@ function Login() {
     event.preventDefault();
     axios({
       method: 'POST',
-      url: 'http://localhost:8080/api/auth',
+      url: 'http://localhost:8080/api/login',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -34,6 +34,7 @@ function Login() {
     })
       .then((response) => {
         console.log('User Login Succesful!');
+        console.log(response);
         const jwtToken = response.data;
         localStorage.setItem('x-auth-token', jwtToken); // send this auth token in headers for api endpoints
         setUserInfo({ ...userInfo, redirectTo: true, loggedIn: true });
