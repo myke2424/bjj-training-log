@@ -6,8 +6,9 @@ import Register from './user/Register';
 function App() {
   return (
     <div className='App'>
-      <h1>Bjj</h1>
-      <Login />
+      <div className='container'>
+        <Login />
+      </div>
     </div>
   );
 }

@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import { Alert, Button, Form, FormGroup, Input, FormText } from 'reactstrap';
 import axios from 'axios';
+import './user.css';
 
 function Login() {
   const [userInfo, setUserInfo] = useState({
@@ -7,10 +9,9 @@ function Login() {
     password: '',
     error: '',
     redirectTo: false,
-    loggedIn: false,
   });
 
-  const { email, password, error, redirectTo, loggedIn } = userInfo;
+  const { email, password, error, redirectTo } = userInfo;
 
   // Dynamic handler (Handle multiple input changes)
   const handleInputChange = (event) => {
@@ -38,7 +39,7 @@ function Login() {
         console.log(response);
         const jwtToken = response.data;
         localStorage.setItem('x-auth-token', jwtToken); // send this auth token in headers for api endpoints
-        setUserInfo({ ...userInfo, redirectTo: true, loggedIn: true });
+        setUserInfo({ ...userInfo, redirectTo: true });
       })
       .catch((err) => {
         console.log(err.message);
@@ -52,47 +53,35 @@ function Login() {
     if (redirectTo) console.log('redirecting placeholder...');
   };
 
-  const LoggedInText = () => (
-    <div>
-      <h1>Logged In</h1>
-    </div>
-  );
-
-  const userStatus = () => {
-    if (loggedIn && !error) {
-      return <LoggedInText />;
-    }
-  };
-
-  const userLogout = () => {
-    setUserInfo({ ...userInfo, loggedIn: false });
-  };
-
   const loginForm = () => (
-    <form>
-      <h3>Sign In</h3>
-      <div className='form-group'>
-        <label>Email</label>
-        <input
-          type='text'
-          className='form-control'
-          name='email'
-          value={email}
-          onChange={handleInputChange}
-        />
-      </div>
-      <div className='form-group'>
-        <label>Password</label>
-        <input
-          type='text'
-          className='form-control'
-          name='password'
-          value={password}
-          onChange={handleInputChange}
-        />
-      </div>
-      <button onClick={submitLoginForm}>Login</button>
-    </form>
+    <div className='loginContainer'>
+      <h4>SIGN IN TO YOUR ACCOUNT</h4>
+      <Form>
+        <FormGroup>
+          <Input
+            className='loginInput'
+            type='email'
+            name='email'
+            value={email}
+            placeholder='cobrakai@gmail.com'
+            onChange={handleInputChange}
+          />
+        </FormGroup>
+        <FormGroup>
+          <Input
+            className='loginInput'
+            type='password'
+            name='password'
+            value={password}
+            placeholder='**************'
+            onChange={handleInputChange}
+          />
+        </FormGroup>
+        <Button className='loginBtn' onClick={submitLoginForm}>
+          Submit
+        </Button>
+      </Form>
+    </div>
   );
 
   return (
@@ -100,7 +89,6 @@ function Login() {
       {loginForm()}
       {redirectUser()}
       {showError()}
-      {userStatus()}
     </div>
   );
 }
