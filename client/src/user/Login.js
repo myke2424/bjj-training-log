@@ -7,9 +7,10 @@ function Login() {
     password: '',
     error: '',
     redirectTo: false,
+    loggedIn: false,
   });
 
-  const { email, password, redirectTo, error } = userInfo;
+  const { email, password, error, redirectTo, loggedIn } = userInfo;
 
   // Dynamic handler (Handle multiple input changes)
   const handleInputChange = (event) => {
@@ -22,7 +23,7 @@ function Login() {
     event.preventDefault();
     axios({
       method: 'POST',
-      url: 'http://localhost:8000/api/auth',
+      url: 'http://localhost:8080/api/auth',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -32,8 +33,10 @@ function Login() {
       },
     })
       .then((response) => {
-        console.log(response);
-        setUserInfo({ ...userInfo, redirectTo: true });
+        console.log('User Login Succesful!');
+        const jwtToken = response.data;
+        localStorage.setItem('x-auth-token', jwtToken); // send this auth token in headers for api endpoints
+        setUserInfo({ ...userInfo, redirectTo: true, loggedIn: true });
       })
       .catch((err) => {
         console.log(err.message);
@@ -45,6 +48,22 @@ function Login() {
 
   const redirectUser = () => {
     if (redirectTo) console.log('redirecting placeholder...');
+  };
+
+  const LoggedInText = () => (
+    <div>
+      <h1>Logged In</h1>
+    </div>
+  );
+
+  const userStatus = () => {
+    if (loggedIn && !error) {
+      return <LoggedInText />;
+    }
+  };
+
+  const userLogout = () => {
+    setUserInfo({ ...userInfo, loggedIn: false });
   };
 
   const loginForm = () => (
@@ -79,6 +98,7 @@ function Login() {
       {loginForm()}
       {redirectUser()}
       {showError()}
+      {userStatus()}
     </div>
   );
 }

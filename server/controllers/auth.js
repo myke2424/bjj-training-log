@@ -24,6 +24,8 @@ const authenticateUser = async (req, res) => {
   if (!validPassword) return res.status(400).send('Invalid Email or Password');
 
   const token = user.generateAuthToken();
+  console.log(user);
+  console.log(req.session);
 
   res.send(token);
 };
