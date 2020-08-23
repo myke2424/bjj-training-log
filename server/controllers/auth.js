@@ -25,6 +25,7 @@ const authenticateUser = async (req, res) => {
 
   const token = user.generateAuthToken();
   req.session.key = user.email;
+  console.log(`SessionID:  sess:${req.sessionID}`);
   console.log(req.session);
 
   res.send(token);

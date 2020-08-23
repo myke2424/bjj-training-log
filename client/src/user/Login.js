@@ -31,6 +31,7 @@ function Login() {
         email: email,
         password: password,
       },
+      withCredentials: true,
     })
       .then((response) => {
         console.log('User Login Succesful!');

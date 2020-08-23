@@ -15,7 +15,7 @@ module.exports = function (app) {
     session({
       secret: 'testSession',
       store: new redisStore({
-        host: 'localhost',
+        host: '127.0.0.1',
         port: 6379,
         client: redisClient,
         ttl: 260,
