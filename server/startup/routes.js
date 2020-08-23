@@ -9,7 +9,6 @@ const redis = require('redis');
 const redisClient = redis.createClient();
 
 module.exports = function (app) {
-  // Parse incoming JSON request
   app.use(express.json());
   app.use(cors);
   app.use(
