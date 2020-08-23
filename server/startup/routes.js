@@ -25,7 +25,6 @@ module.exports = function (app) {
       resave: false,
     })
   );
-  // app.use(session);
 
   app.use('/api/users', users);
   app.use('/api/workouts', workouts);
