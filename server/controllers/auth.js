@@ -24,11 +24,11 @@ const authenticateUser = async (req, res) => {
   if (!validPassword) return res.status(400).send('Invalid Email or Password');
 
   const token = user.generateAuthToken();
-  req.session.key = user.email;
+  req.session.key = user._id;
   console.log(`SessionID:  sess:${req.sessionID}`);
   console.log(req.session);
 
-  res.send(token);
+  res.send({ jwtToken: token, userId: user._id });
 };
 
 exports.authenticateUser = authenticateUser;

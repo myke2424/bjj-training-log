@@ -37,8 +37,10 @@ function Login() {
       .then((response) => {
         console.log('User Login Succesful!');
         console.log(response);
-        const jwtToken = response.data;
+        const jwtToken = response.data.jwtToken;
+        const userId = response.data.userId;
         localStorage.setItem('x-auth-token', jwtToken); // send this auth token in headers for api endpoints
+        localStorage.setItem('userId', userId);
         setUserInfo({ ...userInfo, redirectTo: true });
       })
       .catch((err) => {
