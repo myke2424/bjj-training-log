@@ -11,7 +11,7 @@ module.exports = function (req, res, next) {
   try {
     // if the token is valid - return the decoded payload - private key is used to decode the jwt
     const payload = jwt.verify(token, jwtPrivateKey);
-    req.user = payload; // gives us access to user._id
+    req.user = payload; // gives us access to user data (user - id, email, name)
     next();
   } catch (ex) {
     return res.status(400).send('Invalid Token');
