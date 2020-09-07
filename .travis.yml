@@ -5,7 +5,6 @@ dist: trusty
 cache: npm
 services:
   - mongodb
-  - redis-server
 env:
   - JWT_KEY=testKey
 script:

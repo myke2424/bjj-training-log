@@ -24,7 +24,7 @@ function Login() {
     event.preventDefault();
     axios({
       method: 'POST',
-      url: 'http://localhost:8080/api/login',
+      url: 'http://localhost:8080/api/auth',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -37,10 +37,14 @@ function Login() {
       .then((response) => {
         console.log('User Login Succesful!');
         console.log(response);
+
         const jwtToken = response.data.jwtToken;
-        const userId = response.data.userId;
+        const user = response.data.user;
+
         localStorage.setItem('x-auth-token', jwtToken); // send this auth token in headers for api endpoints
-        localStorage.setItem('userId', userId);
+        localStorage.setItem('userId', user.id);
+        localStorage.setItem('username', user.name);
+
         setUserInfo({ ...userInfo, redirectTo: true });
       })
       .catch((err) => {
