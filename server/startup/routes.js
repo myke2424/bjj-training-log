@@ -27,5 +27,5 @@ module.exports = function (app) {
 
   app.use('/api/users', users);
   app.use('/api/workouts', workouts);
-  app.use('/api/login', auth);
+  app.use('/api/auth', auth);
 };

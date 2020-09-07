@@ -28,7 +28,18 @@ const authenticateUser = async (req, res) => {
   console.log(`SessionID:  sess:${req.sessionID}`);
   console.log(req.session);
 
-  res.send({ jwtToken: token, userId: user._id });
+  res.send({
+    jwtToken: token,
+    user: { id: user._id, email: user.email, name: user.name },
+  });
+};
+
+// Get user info from decoded payload
+const getUserInfo = async (req, res) => {
+  console.log(req.user);
+  const user = await User.findById(req.user._id).select('-password');
+  res.json({ user });
 };
 
 exports.authenticateUser = authenticateUser;
+exports.getUserInfo = getUserInfo;

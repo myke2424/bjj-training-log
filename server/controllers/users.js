@@ -1,6 +1,6 @@
 const { User, validate } = require('../models/user');
 const bcrypt = require('bcrypt');
-
+// test
 const createUser = async (req, res) => {
   const { error } = validate(req.body);
 
