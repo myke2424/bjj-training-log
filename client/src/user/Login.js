@@ -3,6 +3,8 @@ import { Alert, Button, Form, FormGroup, Input, FormText } from 'reactstrap';
 import axios from 'axios';
 import './user.css';
 
+import localStorageManager from '../utils/LocalStorageManager';
+
 function Login() {
   const [userInfo, setUserInfo] = useState({
     email: '',
@@ -38,12 +40,14 @@ function Login() {
         console.log('User Login Succesful!');
         console.log(response);
 
-        const jwtToken = response.data.jwtToken;
-        const user = response.data.user;
+        localStorageManager.saveUser(response.data);
 
-        localStorage.setItem('x-auth-token', jwtToken); // send this auth token in headers for api endpoints
-        localStorage.setItem('userId', user.id);
-        localStorage.setItem('username', user.name);
+        // const jwtToken = response.data.jwtToken;
+        // const user = response.data.user;
+
+        // localStorage.setItem('x-auth-token', jwtToken); // send this auth token in headers for api endpoints
+        // localStorage.setItem('userId', user.id);
+        // localStorage.setItem('username', user.name);
 
         setUserInfo({ ...userInfo, redirectTo: true });
       })
