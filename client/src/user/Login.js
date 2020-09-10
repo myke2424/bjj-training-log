@@ -41,14 +41,6 @@ function Login() {
         console.log(response);
 
         localStorageManager.saveUser(response.data);
-
-        // const jwtToken = response.data.jwtToken;
-        // const user = response.data.user;
-
-        // localStorage.setItem('x-auth-token', jwtToken); // send this auth token in headers for api endpoints
-        // localStorage.setItem('userId', user.id);
-        // localStorage.setItem('username', user.name);
-
         setUserInfo({ ...userInfo, redirectTo: true });
       })
       .catch((err) => {
