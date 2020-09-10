@@ -10,7 +10,7 @@ class LocalStorageManager {
 
   getUser() {
     const data = JSON.parse(localStorage.getItem(this.jwtToken));
-    console.log(`Retrieved user: ${data.user.name}`);
+    return data;
   }
 
   removeUser() {

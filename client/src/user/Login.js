@@ -13,6 +13,9 @@ function Login() {
     redirectTo: false,
   });
 
+  const { user } = localStorageManager.getUser();
+  console.log('current user', user);
+
   const { email, password, error, redirectTo } = userInfo;
 
   // Dynamic handler (Handle multiple input changes)
