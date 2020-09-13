@@ -1,5 +1,14 @@
 import React, { useState } from 'react';
 import { Alert, Button, Form, FormGroup, Input, FormText } from 'reactstrap';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  Redirect,
+  useHistory,
+  useLocation,
+} from 'react-router-dom';
 import axios from 'axios';
 import './user.css';
 
@@ -12,9 +21,6 @@ function Login() {
     error: '',
     redirectTo: false,
   });
-
-  const { user } = localStorageManager.getUser();
-  console.log('current user', user);
 
   const { email, password, error, redirectTo } = userInfo;
 
@@ -55,7 +61,7 @@ function Login() {
   const showError = () => <div>{error}</div>;
 
   const redirectUser = () => {
-    if (redirectTo) console.log('redirecting placeholder...');
+    if (redirectTo) return <Redirect to='/user/dashboard' />;
   };
 
   const loginForm = () => (
