@@ -1,14 +1,6 @@
 import React, { useState } from 'react';
 import { Alert, Button, Form, FormGroup, Input, FormText } from 'reactstrap';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  Redirect,
-  useHistory,
-  useLocation,
-} from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import './user.css';
 

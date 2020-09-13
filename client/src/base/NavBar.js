@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Redirect } from 'react-router-dom';
 import {
   Collapse,
   Navbar,
@@ -17,16 +18,24 @@ import localStorageManager from '../utils/LocalStorageManager';
 
 function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isloggedIn, setIsLoggedIn] = useState(true);
   const toggle = () => setIsOpen(!isOpen);
 
   const logout = () => {
     localStorageManager.removeUser();
+    setIsLoggedIn(false);
     console.log('User signed out');
   };
 
-  const { user } = localStorageManager.getUser();
+  const authenticated = localStorageManager.getUser();
 
-  return (
+  const redirectUser = () => {
+    if (!isloggedIn) {
+      return <Redirect to='/' />;
+    }
+  };
+
+  const navbar = () => (
     <div>
       <Navbar color='light' light expand='md'>
         <NavbarBrand href='/'>cobra kai</NavbarBrand>
@@ -39,7 +48,7 @@ function NavBar() {
           </Nav>
           <UncontrolledDropdown>
             <DropdownToggle nav caret>
-              Mike
+              {authenticated ? authenticated.user.name : ''}
             </DropdownToggle>
             <DropdownMenu right>
               <DropdownItem onClick={logout}>Logout</DropdownItem>
@@ -48,6 +57,13 @@ function NavBar() {
           </UncontrolledDropdown>
         </Collapse>
       </Navbar>
+    </div>
+  );
+
+  return (
+    <div>
+      {navbar()}
+      {redirectUser()}
     </div>
   );
 }
