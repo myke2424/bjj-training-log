@@ -1,18 +1,26 @@
 import React from 'react';
 import { Alert, Button, Form, FormGroup, Input, FormText } from 'reactstrap';
 
-const LoginForm = (props) => {
+const RegistrationForm = (props) => {
   return (
     <div className='authContainer'>
-      <h4>SIGN IN TO YOUR ACCOUNT</h4>
+      <h4>CREATE ACCOUNT</h4>
       <Form>
+        <FormGroup>
+          <Input
+            className='authInput'
+            type='text'
+            name='name'
+            value={props.email}
+            onChange={props.inputHandler}
+          />
+        </FormGroup>
         <FormGroup>
           <Input
             className='authInput'
             type='email'
             name='email'
             value={props.email}
-            placeholder='cobrakai@gmail.com'
             onChange={props.inputHandler}
           />
         </FormGroup>
@@ -22,7 +30,15 @@ const LoginForm = (props) => {
             type='password'
             name='password'
             value={props.password}
-            placeholder='**************'
+            onChange={props.inputHandler}
+          />
+        </FormGroup>
+        <FormGroup>
+          <Input
+            className='authInput'
+            type='belt'
+            name='belt'
+            value={props.belt}
             onChange={props.inputHandler}
           />
         </FormGroup>
@@ -34,4 +50,4 @@ const LoginForm = (props) => {
   );
 };
 
-export default LoginForm;
+export default RegistrationForm;

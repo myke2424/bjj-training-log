@@ -8,7 +8,7 @@
   width: 25%;
 }
 
-.loginBtn {
+.authBtn {
   background-color: #6c64d4;
   width: 40%;
   font-weight: 600;
@@ -19,12 +19,12 @@ form {
   text-align: center;
 }
 
-.loginInput {
+.authInput {
   margin: auto;
   width: 75%;
   background-color: #e5e8ed;
 }
 
-.loginContainer {
+.authContainer {
   margin-top: 250px;
 }

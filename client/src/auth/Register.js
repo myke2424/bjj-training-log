@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import RegisterForm from './RegistrationForm';
 
 function Register() {
   const [userInfo, setUserInfo] = useState({
@@ -38,53 +39,18 @@ function Register() {
       .catch((err) => console.log(err.message));
   };
 
-  const registerForm = () => (
-    <form>
-      <div className='form-group'>
-        <label>Name</label>
-        <input
-          type='text'
-          className='form-control'
-          name='name'
-          value={name}
-          onChange={handleInputChange}
-        />
-      </div>
-      <div className='form-group'>
-        <label>Email</label>
-        <input
-          type='text'
-          className='form-control'
-          name='email'
-          value={email}
-          onChange={handleInputChange}
-        />
-      </div>
-      <div className='form-group'>
-        <label>Password</label>
-        <input
-          type='text'
-          className='form-control'
-          name='password'
-          value={password}
-          onChange={handleInputChange}
-        />
-      </div>
-      <div className='form-group'>
-        <label>Belt</label>
-        <input
-          type='text'
-          className='form-control'
-          name='belt'
-          value={belt}
-          onChange={handleInputChange}
-        />
-      </div>
-      <button onClick={submitRegisterForm}>Register</button>
-    </form>
+  return (
+    <div>
+      <RegisterForm
+        name={name}
+        email={email}
+        password={password}
+        belt={belt}
+        inputHandler={handleInputChange}
+        submitForm={submitRegisterForm}
+      />
+    </div>
   );
-
-  return <div>{registerForm()}</div>;
 }
 
 export default Register;

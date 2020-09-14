@@ -59,13 +59,13 @@ function Login() {
   return (
     <div>
       <LoginForm
-        userEmail={email}
-        userPassword={password}
+        email={email}
+        password={password}
         inputHandler={handleInputChange}
         submitForm={submitLoginForm}
       />
-      {redirectUser()}
       {error ? <Error errorMsg={error} /> : null}
+      {redirectUser()}
     </div>
   );
 }
