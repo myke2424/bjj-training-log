@@ -34,7 +34,7 @@ function Workout() {
       },
       data: {
         type: type,
-        userId: user._id,
+        userId: user.id,
         date: date,
         sessionLength: sessionLength,
         techniques: techniques,
