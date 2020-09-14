@@ -19,12 +19,15 @@ describe('/api/workouts', () => {
     mongoose.connection.close();
   });
 
+  // create the user and get the jwt token
   const user = new User({
     name: 'mike',
     email: 'michael24@gmail.com',
     password: 12345,
     belt: 'white',
   });
+
+  const jwtToken = user.generateAuthToken();
 
   const req = {
     body: {
@@ -38,14 +41,18 @@ describe('/api/workouts', () => {
   };
 
   describe('GET /', () => {
-    it('should return all workouts', async () => {
+    it('should return all workouts for a given user', async () => {
       let workout1 = { ...req.body };
       let workout2 = { ...req.body };
       workout2.type = 'open-mat';
 
       // insert test data
       await Workout.insertMany([workout1, workout2]);
-      const res = await request(server).get('/api/workouts');
+      const res = await request(server)
+        .get('/api/workouts')
+        .set('x-auth-token', jwtToken)
+        .send({ id: req.body.userId });
+
       expect(res.status).toBe(200);
     });
   });
@@ -55,7 +62,9 @@ describe('/api/workouts', () => {
       const workout = new Workout(req.body);
       await workout.save();
 
-      const res = await request(server).get('/api/workouts/' + workout._id);
+      const res = await request(server)
+        .get('/api/workouts/' + workout._id)
+        .set('x-auth-token', jwtToken);
 
       expect(res.status).toBe(200);
       expect(res.body).toHaveProperty('type', workout.type);
@@ -63,19 +72,19 @@ describe('/api/workouts', () => {
 
     it('should return 404 if invalid id is passed', async () => {
       let id = mongoose.Types.ObjectId();
-      const res = await request(server).get('/api/workouts/' + id);
+      const res = await request(server)
+        .get('/api/workouts/' + id)
+        .set('x-auth-token', jwtToken);
 
       expect(res.status).toBe(404);
     });
   });
 
   describe('POST /', () => {
-    const token = user.generateAuthToken();
-
     it('should save the workout if it is valid', async () => {
       const res = await request(server)
         .post('/api/workouts')
-        .set('x-auth-token', token)
+        .set('x-auth-token', jwtToken)
         .send(req.body);
 
       expect(res.body).not.toBeNull();
@@ -87,7 +96,7 @@ describe('/api/workouts', () => {
 
       const res = await request(server)
         .post('/api/workouts')
-        .set('x-auth-token', token)
+        .set('x-auth-token', jwtToken)
         .send(workout);
 
       expect(res.status).toBe(400);
@@ -99,7 +108,7 @@ describe('/api/workouts', () => {
 
       const res = await request(server)
         .post('/api/workouts')
-        .set('x-auth-token', token)
+        .set('x-auth-token', jwtToken)
         .send(workout);
 
       expect(res.status).toBe(400);
@@ -111,7 +120,7 @@ describe('/api/workouts', () => {
 
       const res = await request(server)
         .post('/api/workouts')
-        .set('x-auth-token', token)
+        .set('x-auth-token', jwtToken)
         .send(workout);
 
       expect(res.status).toBe(400);
@@ -123,7 +132,7 @@ describe('/api/workouts', () => {
 
       const res = await request(server)
         .post('/api/workouts')
-        .set('x-auth-token', token)
+        .set('x-auth-token', jwtToken)
         .send(workout);
 
       expect(res.status).toBe(400);

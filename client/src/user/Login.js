@@ -11,10 +11,9 @@ function Login() {
     email: '',
     password: '',
     error: '',
-    redirectTo: false,
   });
 
-  const { email, password, error, redirectTo } = userInfo;
+  const { email, password, error } = userInfo;
 
   // Dynamic handler (Handle multiple input changes)
   const handleInputChange = (event) => {
@@ -42,7 +41,7 @@ function Login() {
         console.log(response);
 
         localStorageManager.saveUser(response.data);
-        setUserInfo({ ...userInfo, redirectTo: true });
+        setUserInfo({ ...userInfo });
       })
       .catch((err) => {
         console.log(err.message);
@@ -53,7 +52,8 @@ function Login() {
   const showError = () => <div>{error}</div>;
 
   const redirectUser = () => {
-    if (redirectTo) return <Redirect to='/user/dashboard' />;
+    if (localStorageManager.getUser()) return <Redirect to='/user/dashboard' />;
+    else return <Redirect to='/' />;
   };
 
   const loginForm = () => (

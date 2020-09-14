@@ -43,7 +43,10 @@ function NavBar() {
         <Collapse isOpen={isOpen} navbar>
           <Nav className='mr-auto' navbar>
             <NavItem>
-              <NavLink href='/workouts'>workouts</NavLink>
+              <NavLink href='/user/workout'>Add Workout</NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink href='/user/workouts'>Workouts</NavLink>
             </NavItem>
           </Nav>
           <UncontrolledDropdown>
