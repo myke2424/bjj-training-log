@@ -11,10 +11,9 @@ const {
 
 // This API Endpoint can only be accessed by authenticated users
 router.post('/', auth, createWorkout);
-
-router.get('/', getWorkouts);
-router.get('/:id', getWorkout);
-router.put('/:id', updateWorkout);
-router.delete('/:id', deleteWorkout);
+router.get('/', auth, getWorkouts);
+router.get('/:id', auth, getWorkout);
+router.put('/:id', auth, updateWorkout);
+router.delete('/:id', auth, deleteWorkout);
 
 module.exports = router;

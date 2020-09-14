@@ -45,6 +45,9 @@ function NavBar() {
             <NavItem>
               <NavLink href='/user/workout'>Add Workout</NavLink>
             </NavItem>
+            <NavItem>
+              <NavLink href='/user/workouts'>Workouts</NavLink>
+            </NavItem>
           </Nav>
           <UncontrolledDropdown>
             <DropdownToggle nav caret>

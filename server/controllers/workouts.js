@@ -32,7 +32,8 @@ const getWorkout = async (req, res) => {
 };
 
 const getWorkouts = async (req, res) => {
-  const workouts = await Workout.find();
+  const userId = req.body.id;
+  const workouts = await Workout.find({ userId });
   res.send(workouts);
 };
 
