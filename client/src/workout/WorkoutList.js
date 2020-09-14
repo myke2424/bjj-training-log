@@ -5,6 +5,7 @@ import axios from 'axios';
 import localStorageManager from '../utils/LocalStorageManager';
 
 function WorkoutList() {
+  const [workouts, setWorkouts] = useState([]);
   const { jwtToken, user } = localStorageManager.getUser();
 
   const getWorkouts = () => {
@@ -19,6 +20,7 @@ function WorkoutList() {
       .then((response) => {
         console.log(`${user.name} workouts`);
         console.log(response);
+        setWorkouts([...response.data]);
       })
       .catch((err) => {
         console.log(err.message);

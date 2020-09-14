@@ -9,7 +9,7 @@ const {
   deleteWorkout,
 } = require('../controllers/workouts');
 
-// This API Endpoint can only be accessed by authenticated users
+// This API Endpoints can only be accessed by authenticated users
 router.post('/', auth, createWorkout);
 router.get('/', auth, getWorkouts);
 router.get('/:id', auth, getWorkout);
