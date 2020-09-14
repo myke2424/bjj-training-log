@@ -5,7 +5,7 @@ import localStorageManager from '../utils/LocalStorageManager';
 
 function Dashboard() {
   // If the user doesn't exist - redirect to the login page
-  const isAuthenticated = () => {
+  const redirectUser = () => {
     if (!localStorageManager.getUser()) {
       return <Redirect to='/' />;
     }
@@ -14,7 +14,7 @@ function Dashboard() {
   return (
     <div>
       <NavBar />
-      {isAuthenticated()}
+      {redirectUser()}
     </div>
   );
 }
