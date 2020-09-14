@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
-import LoginForm from './LoginForm';
 import './auth.css';
+
+import LoginForm from './LoginForm';
+import Error from './Error';
 
 import localStorageManager from '../utils/LocalStorageManager';
 
@@ -49,43 +51,10 @@ function Login() {
       });
   };
 
-  const showError = () => <div>{error}</div>;
-
   const redirectUser = () => {
     if (localStorageManager.getUser()) return <Redirect to='/user/dashboard' />;
     else return <Redirect to='/' />;
   };
-
-  // const loginForm = () => (
-  //   <div className='loginContainer'>
-  //     <h4>SIGN IN TO YOUR ACCOUNT</h4>
-  //     <Form>
-  //       <FormGroup>
-  //         <Input
-  //           className='loginInput'
-  //           type='email'
-  //           name='email'
-  //           value={email}
-  //           placeholder='cobrakai@gmail.com'
-  //           onChange={handleInputChange}
-  //         />
-  //       </FormGroup>
-  //       <FormGroup>
-  //         <Input
-  //           className='loginInput'
-  //           type='password'
-  //           name='password'
-  //           value={password}
-  //           placeholder='**************'
-  //           onChange={handleInputChange}
-  //         />
-  //       </FormGroup>
-  //       <Button className='loginBtn' onClick={submitLoginForm}>
-  //         Submit
-  //       </Button>
-  //     </Form>
-  //   </div>
-  // );
 
   return (
     <div>
@@ -96,7 +65,7 @@ function Login() {
         submitForm={submitLoginForm}
       />
       {redirectUser()}
-      {showError()}
+      {error ? <Error errorMsg={error} /> : null}
     </div>
   );
 }
