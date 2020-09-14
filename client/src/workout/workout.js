@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Alert, Button, Form, FormGroup, Input, FormText } from 'reactstrap';
 import axios from 'axios';
 
+import localStorageManager from '../utils/LocalStorageManager';
+
 function Workout() {
   const [workoutInfo, setWorkoutInfo] = useState({
     type: '',
@@ -11,6 +13,8 @@ function Workout() {
     techniques: ['arm-bar', 'testing'],
     notes: '',
   });
+
+  const { jwtToken, user } = localStorageManager.getUser();
 
   const { type, userId, date, sessionLength, techniques, notes } = workoutInfo;
 
@@ -26,11 +30,11 @@ function Workout() {
       url: 'http://localhost:8080/api/workouts',
       headers: {
         'Content-Type': 'application/json',
-        'x-auth-token': localStorage.getItem('x-auth-token'),
+        'x-auth-token': jwtToken,
       },
       data: {
         type: type,
-        userId: localStorage.getItem('userId'),
+        userId: user._id,
         date: date,
         sessionLength: sessionLength,
         techniques: techniques,
