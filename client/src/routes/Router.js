@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
-import Register from '../user/Register';
-import Login from '../user/Login';
+import Register from '../auth/Register';
+import Login from '../auth/Login';
 import Dashboard from '../user/Dashboard';
 import Workout from '../workout/workout';
 import WorkoutList from '../workout/WorkoutList';

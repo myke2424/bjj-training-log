@@ -1,9 +1,5 @@
 import React from 'react';
 import './App.css';
-import Login from './user/Login';
-import NavBar from './base/NavBar';
-import Register from './user/Register';
-import Workout from './workout/workout';
 import routes from './routes/Router';
 
 function App() {
