@@ -1,0 +1,30 @@
+/* body {
+  background-color: #6c64d4;
+} */
+
+.container {
+  background-color: white;
+  margin: auto;
+  width: 25%;
+}
+
+.loginBtn {
+  background-color: #6c64d4;
+  width: 40%;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+form {
+  text-align: center;
+}
+
+.loginInput {
+  margin: auto;
+  width: 75%;
+  background-color: #e5e8ed;
+}
+
+.loginContainer {
+  margin-top: 250px;
+}
